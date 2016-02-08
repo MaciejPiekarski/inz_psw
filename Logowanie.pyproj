@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>Logowanie</Name>
+    <RootNamespace>Logowanie</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>b5cd34be-ca3b-4052-a455-eba24ea69f2b</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="main_skrypt.py" />
+    <Compile Include="PSW\forms.py" />
+    <Compile Include="PSW\models.py" />
+    <Compile Include="PSW\tests.py" />
+    <Compile Include="PSW\views.py" />
+    <Compile Include="PSW\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="Logowanie\__init__.py" />
+    <Compile Include="Logowanie\settings.py" />
+    <Compile Include="Logowanie\urls.py" />
+    <Compile Include="Logowanie\wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PSW\" />
+    <Folder Include="PSW\static\" />
+    <Folder Include="PSW\static\app\" />
+    <Folder Include="PSW\static\app\content\" />
+    <Folder Include="PSW\static\app\fonts\" />
+    <Folder Include="PSW\static\app\scripts\" />
+    <Folder Include="PSW\templates\" />
+    <Folder Include="PSW\templates\psw\" />
+    <Folder Include="Logowanie\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PSW\templates\psw\listservers.html" />
+    <Content Include="PSW\templates\psw\register.html" />
+    <Content Include="PSW\templates\psw\servers.html" />
+    <Content Include="PSW\static\app\content\bootstrap.css" />
+    <Content Include="PSW\static\app\content\bootstrap.min.css" />
+    <Content Include="PSW\static\app\content\site.css" />
+    <Content Include="PSW\static\app\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="PSW\static\app\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="PSW\static\app\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="PSW\static\app\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="PSW\static\app\scripts\bootstrap.js" />
+    <Content Include="PSW\static\app\scripts\bootstrap.min.js" />
+    <Content Include="PSW\static\app\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="PSW\static\app\scripts\jquery-1.10.2.js" />
+    <Content Include="PSW\static\app\scripts\jquery-1.10.2.min.js" />
+    <Content Include="PSW\static\app\scripts\jquery-1.10.2.min.map" />
+    <Content Include="PSW\static\app\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="PSW\static\app\scripts\jquery.validate.js" />
+    <Content Include="PSW\static\app\scripts\jquery.validate.min.js" />
+    <Content Include="PSW\static\app\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="PSW\static\app\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="PSW\static\app\scripts\modernizr-2.6.2.js" />
+    <Content Include="PSW\static\app\scripts\respond.js" />
+    <Content Include="PSW\static\app\scripts\respond.min.js" />
+    <Content Include="PSW\static\app\scripts\_references.js" />
+    <Content Include="PSW\templates\psw\about.html" />
+    <Content Include="PSW\templates\psw\contact.html" />
+    <Content Include="PSW\templates\psw\index.html" />
+    <Content Include="PSW\templates\psw\layout.html" />
+    <Content Include="PSW\templates\psw\login.html" />
+    <Content Include="PSW\templates\psw\loginpartial.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.mht">
+      <SubType>WebBrowser</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
