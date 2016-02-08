@@ -1,5 +1,5 @@
 """
-Definition of urls for Logowanie.
+Definition of urls for Inz.
 """
 
 from datetime import datetime

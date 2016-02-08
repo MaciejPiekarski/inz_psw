@@ -1,0 +1,11 @@
+C:\wamp\www\Clean_PSW\bin\Microsoft.PythonTools.WebRole.dll
+C:\wamp\www\Clean_PSW\obj\Debug\attach_server.py
+C:\wamp\www\Clean_PSW\obj\Debug\visualstudio_py_debugger.py
+C:\wamp\www\Clean_PSW\obj\Debug\visualstudio_py_repl.py
+C:\wamp\www\Clean_PSW\obj\Debug\visualstudio_py_util.py
+C:\wamp\www\Clean_PSW\obj\Debug\__init__.py
+C:\wamp\www\Clean_PSW\obj\Debug\__main__.py
+C:\wamp\www\Clean_PSW\bin\AzureSetup.cfg
+C:\wamp\www\Clean_PSW\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\wamp\www\Clean_PSW\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\wamp\www\Clean_PSW\bin\wfastcgi.py

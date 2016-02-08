@@ -1,5 +1,5 @@
 """
-Django settings for Logowanie project.
+Django settings for Inz project.
 """
 
 from os import path
@@ -111,10 +111,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Logowanie.urls'
+ROOT_URLCONF = 'Inz.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'Logowanie.wsgi.application'
+WSGI_APPLICATION = 'Inz.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or
