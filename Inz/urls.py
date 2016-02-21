@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'PSW.views.home', name='home'),
     url(r'^servers/', 'PSW.views.servers', name='servers'),
+    url(r'^psw/servers/', 'PSW.views.servers', name='servers'),
     url(r'^listservers/', 'PSW.views.listservers', name='listservers'),
     url(r'^register/', 'PSW.views.register', name='register'),
     url(r'^login/$',
