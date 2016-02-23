@@ -80,14 +80,24 @@ def login_view(request):
 def servers(request):
     if request.method == 'POST':
         form = CommandForm(request.POST)
+        
         if form.is_valid():
+            form.instance.user = request.user
             ip = form.cleaned_data['ip']
             system = form.cleaned_data['system']
             ram = form.cleaned_data['ram']
             quote = form.cleaned_data['quote']
+<<<<<<< HEAD
             commandlog = 'python3.5 /root/log_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + ' >> psw_log.log'
             command = 'python3.5 /root/main_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + '  > wyniki_testy.txt'            
             #form.save()
+=======
+            username = str(request.user.get_username())
+            user_id = request.user.id
+            commandlog = 'python3.5 /root/log_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote +  ' ' + username + ' >> PSW_log.log'
+            command = 'python3.5 /root/main_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + ' ' + username + '  > wyniki_testy.txt'            
+            form.save()
+>>>>>>> refs/remotes/origin/pr/1
             #Tworzenie ze skryptu.py Python 3.5 
             try:
                 ssh = paramiko.SSHClient()
