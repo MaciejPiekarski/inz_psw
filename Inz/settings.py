@@ -80,11 +80,8 @@ WSGI_APPLICATION = 'Inz.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-<<<<<<< HEAD
         'NAME': 'cleanpsw',
-=======
         'NAME': 'psw',
->>>>>>> refs/remotes/origin/pr/1
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
