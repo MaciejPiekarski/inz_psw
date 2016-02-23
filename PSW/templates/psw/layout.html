@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSW - {%block title %}{% endblock %}</title>
+    <title>psw - {%block title %}{% endblock %}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">PSW</a>
+                <a href="/" class="navbar-brand">psw</a>
             </div>
             <div class="navbar-collapse collapse">
                 {% if user.is_authenticated %}
@@ -37,7 +37,7 @@
 {% block content %}{% endblock %}
         <hr/>
         <footer>
-            <p>&copy; {{ year }} - PSW. Stworzone przez:GK AZ MP TW</p>
+            <p>&copy; {{ year }} - psw. Stworzone przez:GK AZ MP TW</p>
         </footer>
     </div>
 

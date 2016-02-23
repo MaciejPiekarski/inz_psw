@@ -4,12 +4,12 @@ Definition of forms.
 
 from django import forms
 from django.forms import widgets, ModelForm
-from PSW.models import Commands
+from psw.models import Commands
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
-class PswAuthenticationForm(AuthenticationForm):
+class pswAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
     username = forms.CharField(max_length=254,
                                widget=forms.TextInput({
@@ -20,7 +20,7 @@ class PswAuthenticationForm(AuthenticationForm):
                                    'class': 'form-control',
                                    'placeholder': 'Haslo'}))
 
-class PswCreateForm(UserCreationForm):
+class pswCreateForm(UserCreationForm):
     username = forms.CharField(max_length=30,
                                widget=forms.TextInput({
                                    'class': 'form-control',
@@ -50,7 +50,7 @@ class PswCreateForm(UserCreationForm):
         fields = ('first_name','last_name','username', 'email', 'password1', 'password2')
 
     def save(self,commit = True):   
-        user = super(PswCreateForm, self).save(commit = False)
+        user = super(pswCreateForm, self).save(commit = False)
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']

@@ -6,11 +6,12 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from datetime import datetime
-from PSW.forms import PswCreateForm, CommandForm
+from psw.forms import pswCreateForm, CommandForm, pswAuthenticationForm
 import paramiko
 from subprocess import call
-from PSW.models import Commands
+from psw.models import Commands
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 def home(request):
     """Renders the home page."""
@@ -55,12 +56,26 @@ def about(request):
 
 def register(request):
     if request.method == 'POST':
-        form = PswCreateForm(request.POST)
+        form = pswCreateForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponse('poszło')
-    form = PswCreateForm()
+    form = pswCreateForm()
     return render(request, 'psw/register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+            else:
+                return HttpResponse('Nie poszło - nieaktywny')
+        else:
+            return HttpResponse('Nie poszło - złe dane')
+    return render(request, 'psw/login.html', {'form': pswAuthenticationForm(request.POST)})
 
 def servers(request):
     if request.method == 'POST':
@@ -70,7 +85,7 @@ def servers(request):
             system = form.cleaned_data['system']
             ram = form.cleaned_data['ram']
             quote = form.cleaned_data['quote']
-            commandlog = 'python3.5 /root/log_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + ' >> PSW_log.log'
+            commandlog = 'python3.5 /root/log_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + ' >> psw_log.log'
             command = 'python3.5 /root/main_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + '  > wyniki_testy.txt'            
             #form.save()
             #Tworzenie ze skryptu.py Python 3.5 
