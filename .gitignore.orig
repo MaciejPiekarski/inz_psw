@@ -1,8 +1,11 @@
 Clean_PSW
 *.pyc
+<<<<<<< HEAD
+=======
 
 bin/*
 obj/*
 Logowanie.*
 web.*
 readme.mht
+>>>>>>> clean up
