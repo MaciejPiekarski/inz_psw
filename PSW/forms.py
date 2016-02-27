@@ -4,11 +4,13 @@ Definition of forms.
 
 from django import forms
 from django.forms import widgets, ModelForm
-from psw.models import Commands
+from psw.models import Commands, Services
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
+
+        
 class pswAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
     username = forms.CharField(max_length=254,
@@ -69,7 +71,38 @@ class CommandForm(forms.ModelForm):
     system = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),choices=SYSTEM_CHOICES)
     ram = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),choices=RAM_CHOICES)
     quote = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),choices=QUOTE_CHOICES)
+    name = forms.CharField(max_length=8, widget=forms.TextInput({'class': 'form-control'}))
 
     class Meta:
         model = Commands
-        fields = ('ip','system','ram','quote')
+        fields = ('ip','system','ram','quote','name')
+
+
+
+
+class ServicesForm(forms.ModelForm):
+    
+        
+    SQL_CHOICES = (('mySQL','mySQL'),('PostreSQL','PostgreSQL'))
+    HTTP_CHOICES = (('Apache2','Apache2'),('Nginx','Nginx'))
+    PHP_CHOICES = (('5.3','5.3'),('5.4','5.4'),('5.5','5.5'))
+    contener = forms.ModelChoiceField(queryset = Commands.objects.none() ,widget=forms.Select(attrs={'class':'form-control'}))
+    sql = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),choices=SQL_CHOICES)
+    http = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),choices=HTTP_CHOICES)
+    php = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),choices=PHP_CHOICES)
+    class Meta:
+        model = Services
+        fields = ('contener','sql','http','php')
+  
+          
+    def __init__(self, *args, **kwargs):
+        
+        user = kwargs.pop('user',None)
+        super(ServicesForm, self).__init__(*args, **kwargs)
+        qs = Commands.objects.filter(user=user)
+        self.fields['contener'].initial = qs
+        self.fields['contener'].queryset = qs     
+      
+    
+        
+           
