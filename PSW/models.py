@@ -13,9 +13,21 @@ class Commands(models.Model):
     system = models.CharField('System', max_length=50)
     ram = models.IntegerField('Ram')
     quote = models.IntegerField('Quote')
+    name = models.CharField('Nazwa', max_length=8)
     user = models.ForeignKey(User, verbose_name="Użytkownik")
     class Meta:
         verbose_name = 'Komenda'
         verbose_name_plural = 'Komendy'
     def __str__(self):
-        return self.ip
+        return self.name
+
+class Services(models.Model):
+    contener = models.ForeignKey(Commands, verbose_name="Kontener")
+    sql = models.CharField('Serwer baz danych',max_length=50,default='Brak')
+    http = models.CharField('Serwer http',max_length=50,default='Brak')
+    php = models.CharField('Serwer php',max_length=50,default='Brak')
+    class Meta:
+        verbose_name = 'Usługa'
+        verbose_name_plural = 'Usługi'
+    def __str__(self):
+        return self.sql

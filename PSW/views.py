@@ -6,12 +6,13 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from datetime import datetime
-from psw.forms import pswCreateForm, CommandForm, pswAuthenticationForm
+from psw.forms import pswCreateForm, CommandForm, pswAuthenticationForm, ServicesForm
 import paramiko
 from subprocess import call
-from psw.models import Commands
+from psw.models import Commands, Services
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django import forms
 
 def home(request):
     """Renders the home page."""
@@ -88,7 +89,6 @@ def servers(request):
             ram = form.cleaned_data['ram']
             quote = form.cleaned_data['quote']
             username = str(request.user.get_username())
-            user_id = request.user.id
             #commandlog = 'python3.5 /root/log_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote +  ' ' + username + ' >> PSW_log.log'
             #command = 'python3.5 /root/main_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + ' ' + username + '  > wyniki_testy.txt'
             form.save()
@@ -112,6 +112,26 @@ def servers(request):
     return render(request, 'psw/servers.html', {'form': form})
 
 def listservers(request):
-    servers = Commands.objects.all
+    
+    servers = Commands.objects.filter(user=request.user)
     context_dict = {'servers': servers}
     return render(request, 'psw/listservers.html' , context_dict)
+
+def services(request):
+    
+    if request.method == 'POST':
+        qs = Commands.objects.filter(user=request.user)
+        form = ServicesForm(request.POST,user=request.user)
+        
+        if form.is_valid():
+            
+            sql = form.cleaned_data['sql']
+            http = form.cleaned_data['http']
+            php = form.cleaned_data['php']
+            form.save()
+            return HttpResponseRedirect('services/')
+            
+    else:
+        form = ServicesForm()
+    return render(request, 'psw/services.html', {'form': form})
+

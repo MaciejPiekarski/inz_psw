@@ -18,16 +18,19 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'psw',
         'USER': 'postgres',
         'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'HOST': '',
         'PORT': '5432',
     }
 }
+
+
 
 LOGIN_URL = '/login'
 
