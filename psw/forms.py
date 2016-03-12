@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
-
         
 class pswAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
@@ -21,6 +20,7 @@ class pswAuthenticationForm(AuthenticationForm):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder': 'Haslo'}))
+
 
 class pswCreateForm(UserCreationForm):
     username = forms.CharField(max_length=30,
@@ -47,7 +47,9 @@ class pswCreateForm(UserCreationForm):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder': 'Powtórz Hasło'}))
+
     class Meta:
+
         model = User
         fields = ('first_name','last_name','username', 'email', 'password1', 'password2')
 
@@ -61,6 +63,7 @@ class pswCreateForm(UserCreationForm):
             user.save()
 
         return user
+
 
 class CommandForm(forms.ModelForm):
     IP_CHOICES = (('192.168.0.10','192.168.0.10'),('192.168.0.11','192.168.0.11'))
@@ -78,12 +81,9 @@ class CommandForm(forms.ModelForm):
         fields = ('system','ram','quote','name')
 
 
-
-
 class ServicesForm(forms.ModelForm):
-    
-        
-    SQL_CHOICES = (('mySQL','mySQL'),('PostreSQL','PostgreSQL'))
+
+    SQL_CHOICES = (('mySQL','mySQL'),('PostgreSQL','PostgreSQL'))
     HTTP_CHOICES = (('Apache2','Apache2'),('Nginx','Nginx'))
     PHP_CHOICES = (('5.3','5.3'),('5.4','5.4'),('5.5','5.5'))
     contener = forms.ModelChoiceField(queryset = Commands.objects.none() ,widget=forms.Select(attrs={'class':'form-control'}))
@@ -93,8 +93,7 @@ class ServicesForm(forms.ModelForm):
     class Meta:
         model = Services
         fields = ('contener','sql','http','php')
-  
-          
+
     def __init__(self, *args, **kwargs):
         
         user = kwargs.pop('user',None)

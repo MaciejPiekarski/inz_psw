@@ -31,7 +31,6 @@ DATABASES = {
 }
 
 
-
 LOGIN_URL = '/login'
 
 # Local time zone for this installation. Choices can be found here:

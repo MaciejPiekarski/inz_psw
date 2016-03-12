@@ -7,6 +7,8 @@ from django.forms import widgets
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+
 class Commands(models.Model):
     
     ip = models.CharField('IP', max_length=25)
@@ -15,19 +17,25 @@ class Commands(models.Model):
     quote = models.IntegerField('Quote')
     name = models.CharField('Nazwa', max_length=8)
     user = models.ForeignKey(User, verbose_name="Użytkownik")
+
     class Meta:
         verbose_name = 'Komenda'
         verbose_name_plural = 'Komendy'
+
     def __str__(self):
         return self.name
 
+
 class Services(models.Model):
+
     contener = models.ForeignKey(Commands, verbose_name="Kontener")
     sql = models.CharField('Serwer baz danych',max_length=50,default='Brak')
     http = models.CharField('Serwer http',max_length=50,default='Brak')
     php = models.CharField('Serwer php',max_length=50,default='Brak')
+
     class Meta:
         verbose_name = 'Usługa'
         verbose_name_plural = 'Usługi'
+
     def __str__(self):
         return self.sql

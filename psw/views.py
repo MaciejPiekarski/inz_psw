@@ -1,6 +1,7 @@
 """
 Definition of views.
 """
+# -*- coding: utf-8 -*-
 import paramiko
 
 from django.shortcuts import render
@@ -112,8 +113,8 @@ def servers(request):
             ram = form.cleaned_data['ram']
             quote = form.cleaned_data['quote']
             username = str(request.user.get_username())
-            #commandlog = 'python3.5 /root/log_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote +  ' ' + username + name + ' >> PSW_log.log'
-            #command = 'python3.5 /root/main_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + ' ' + username + name +'  > wyniki_testy.txt'
+            commandlog = 'python3.5 /root/log_skrypt.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote +  ' ' + username + ' ' + name + ' >> PSW_log.log'
+            command = 'python3.5 /root/main_skrypt_podip.py'+ ' '+ ip + ' ' + system + ' ' + ram + ' ' + quote + ' ' + username + ' ' + name +'  > wyniki_testy.txt'
             form.save()
 
             #Tworzenie ze skryptu.py Python 3.5 
@@ -122,12 +123,12 @@ def servers(request):
                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 ssh.connect('89.206.7.46', username='root', password='TrudneHaslo123')
                 # Tworzenie Log
-                #stdin, stdout, stderr = ssh.exec_command(commandlog)
+                stdin, stdout, stderr = ssh.exec_command(commandlog)
                 # Tworzenie kontenerow
-                #stdin, stdout, stderr = ssh.exec_command(command)
+                stdin, stdout, stderr = ssh.exec_command(command)
                 ssh.close()
             except paramiko.ssh_exception.NoValidConnectionsError as e:
-                print ('Error %s' %e)
+                print('Error %s' %e)
                 return HttpResponseRedirect('servers/')
             return HttpResponseRedirect('/')
     else:
@@ -147,11 +148,22 @@ def services(request):
         form = ServicesForm(request.POST,user=request.user)
         
         if form.is_valid():
-            
+            name = str(form.cleaned_data['contener'])
             sql = form.cleaned_data['sql']
             http = form.cleaned_data['http']
             php = form.cleaned_data['php']
+            com_services = 'python3.5 /root/services_skrypt.py'+ ' '+ name + ' ' + sql + ' ' + http + ' ' + php +'  > wyniki_services.txt'
             form.save()
+            try:
+                ssh = paramiko.SSHClient()
+                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                ssh.connect('89.206.7.46', username='root', password='TrudneHaslo123')
+                # Tworzenie serwisów
+                stdin, stdout, stderr = ssh.exec_command(com_services)
+                ssh.close()
+            except paramiko.ssh_exception.NoValidConnectionsError as e:
+                print ('Error %s' %e)
+                return HttpResponseRedirect('servers/')
             return HttpResponseRedirect('services/')
             
     else:

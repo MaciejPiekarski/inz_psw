@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 import sys
 import subprocess
+import string
+import random
 from subprocess import PIPE, call
 import time
+import crypt
 ip = sys.argv[1]
 system = sys.argv[2]
 ram = sys.argv[3]
 quote = sys.argv[4]
-
 user = sys.argv[5]
-'''system = 'Ubuntu'
-ram = '128'
-quote = '2'''
+name = sys.argv[6]
 
 def low_letters(*argsl):
     user = argsl[0].lower() 
@@ -55,6 +55,9 @@ def choose_system(*argss):
     else:
         system = 'inny'
     return system
+
+def pass_generator(size=8, chars=string.ascii_letters + string.digits):
+    return ''.join(random.SystemRandom().choice(chars) for _ in range(size))
     
     
 
@@ -62,6 +65,8 @@ def choose_system(*argss):
 def creating_contener(*argsc):
     uid = str(creating_id())
     server_name = creating_name(low[0],low[1],ram,quote)
+    password = pass_generator()
+    encPass = crypt.crypt(password,"22")
 
     com_create = 'vzctl create ' + uid + ' --ostemplate ' + choose_system(low[1]) + ' --config vswap-1g'
     com_name = 'vzctl set ' + uid + ' --save --name ' + uid + '_' + server_name[0]
@@ -73,7 +78,8 @@ def creating_contener(*argsc):
     com_cpu = 'vzctl set ' + uid + ' --save --cpus 2'
     com_ram = 'vzctl set ' + uid + ' --save --ram ' + argsc[2] + 'M'
     com_quote = 'vzctl set ' + uid + ' --save --diskspace ' + argsc[3] + 'G'
-    com_start = 'vzctl start ' + uid 
+    com_start = 'vzctl start ' + uid
+    com_user = 'vzctl exec ' + uid +'useradd -p ' + encPass + '-s '+ '/bin/bash ' + '-d ' + '/home/'+ argsc[0]+ ' -m '+ argsc[0]
 
 #--------------------------------------
     proc_create = subprocess.call(com_create, shell=True, stdout=PIPE, universal_newlines=True)
@@ -109,14 +115,15 @@ def creating_contener(*argsc):
 #--------------------------------------
     proc_start = subprocess.call(com_start, shell=True, stdout=PIPE, universal_newlines=True)
     proc_start
-    
+#--------------------------------------
+    proc_user = subprocess.call(com_user, shell=True, stdout=PIPE, universal_newlines=True)
+    proc_user    
     return com_create, com_name, com_boot, com_host, com_ram, com_quote 
- 
 
-
-
-
-
+def new_user(*argsu):
+    encPass = crypt.crypt(argsu[2],"22")
+    com_user = 'vzctl exec ' + argsu[0] +'useradd -p ' + encPass + '-s '+ '/bin/bash ' + '-d ' + '/home/'+argsu[1]
+    return com_user
 low = low_letters(user,system)
 server_id = creating_id()
 server_name = creating_name(low[0],low[1],ram,quote)
