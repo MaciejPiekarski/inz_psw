@@ -104,6 +104,3 @@ class ServicesForm(forms.ModelForm):
         self.fields['contener'].initial = qs
         self.fields['contener'].queryset = qs
 
-
-
-           

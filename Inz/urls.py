@@ -14,6 +14,7 @@ from psw.forms import pswAuthenticationForm
 urlpatterns = patterns('',
     url(r'^$', 'psw.views.home', name='home'),
     url(r'^servers/', 'psw.views.servers', name='servers'),
+    url(r'^editservers/', 'psw.views.editservers', name='editservers'),
     url(r'^listservers/', 'psw.views.listservers', name='listservers'),
     url(r'^services/', 'psw.views.services', name='services'),                 
     url(r'^register/', 'psw.views.register', name='register'),

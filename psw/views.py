@@ -176,3 +176,35 @@ def services(request):
         form = ServicesForm()
     return render(request, 'psw/services.html', {'form': form})
 
+def editservers(request):
+    
+    if request.method == 'POST':
+        form = ServicesForm(request.POST,user=request.user)
+        sub_form = CommandForm(request.POST)
+        
+        if form.is_valid() and sub_form.is_valid():
+            name = str(form.cleaned_data['contener'])
+            ram = sub_form.cleaned_data['ram']
+            quote = sub_form.cleaned_data['quote']
+            com_services = 'python3.5 /root/services_skrypt.py'+ ' '+ name + ' ' + sql + ' ' + http + ' ' + php +'  > wyniki_services.txt'
+            edit_servers = form.save()
+            query = Commands.objects.get(name=name)
+            idl = edit_servers.pk
+            query.edit_id = idl
+            query.save()
+            try:
+                ssh = paramiko.SSHClient()
+                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                ssh.connect('89.206.7.46', username='root', password='TrudneHaslo123')
+                # Tworzenie serwisów
+                #stdin, stdout, stderr = ssh.exec_command(com_services)
+                ssh.close()
+            except paramiko.ssh_exception.NoValidConnectionsError as e:
+                print ('Error %s' %e)
+                return HttpResponseRedirect('editservers/')
+            return HttpResponseRedirect('editservers/')
+            
+    else:
+        form = ServicesForm()
+        sub_form = CommandForm()
+    return render(request, 'psw/editservers.html', {'form': form, 'sub_form': sub_form})
